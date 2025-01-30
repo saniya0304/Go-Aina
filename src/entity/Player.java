@@ -245,6 +245,8 @@ public class Player extends Entity {
 	public int getScreenY() {
 		return screenY;
 	}
+    
+ 
 }
 
 

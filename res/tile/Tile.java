@@ -1,25 +1,29 @@
 package tile;
 
-import java.awt.image.BufferedImage;
+public class Tile<T> {
 
-public class Tile {
+    private T image;  // Generic type for image
+    private boolean collision = false;
 
-	private BufferedImage image;
-	private boolean collision = false;
-	
-	public void setImage(BufferedImage image) {
-              this.image = image;
-	}
-	
-	public void setCollision(boolean collision) {
-		      this.collision = collision;
-	}
-	
-	public BufferedImage getImage() {
-		return image;
-	}
-	
-	public boolean getCollision() {
-		return collision;
-	}
+
+
+    // Setter for the image
+    public void setImage(T image) {
+        this.image = image;
+    }
+
+    // Setter for collision
+    public void setCollision(boolean collision) {
+        this.collision = collision;
+    }
+
+    // Getter for the image
+    public T getImage() {
+        return image;
+    }
+
+    // Getter for collision
+    public boolean getCollision() {
+        return collision;
+    }
 }

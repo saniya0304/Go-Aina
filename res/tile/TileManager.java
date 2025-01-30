@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 import main.GamePanel;
@@ -14,7 +15,7 @@ import main.GamePanel;
 public class TileManager {
 
 	GamePanel gp;
-	public Tile[] tile;
+	public Tile<BufferedImage>[] tile;
 	public int mapTileNum[][];
 	
 	public TileManager(GamePanel gp) {
@@ -32,31 +33,33 @@ public class TileManager {
 		 
 		try {
 			
-			tile[0] = new Tile();
+			tile[0] = new Tile<BufferedImage>();
 			tile[0].setImage(ImageIO.read(getClass().getResourceAsStream("/tiles/grass01.png")));
 			
-			tile[1] = new Tile();
+			tile[1] = new Tile<BufferedImage>();
 			tile[1].setImage(ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png")));
 			tile[1].setCollision(true);
 			
-			tile[2] = new Tile();
+			tile[2] = new Tile<BufferedImage>();
 			tile[2].setImage(ImageIO.read(getClass().getResourceAsStream("/tiles/water01.png")));
 			tile[2].setCollision(true);
 			
-			tile[3] = new Tile();
+			tile[3] = new Tile<BufferedImage>();
 			tile[3].setImage(ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png")));
 			
-			tile[4] = new Tile();
+			tile[4] = new Tile<BufferedImage>();
 			tile[4].setImage(ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png")));
 			tile[4].setCollision(true);
 			
-			tile[5] = new Tile();
+			tile[5] = new Tile<BufferedImage>();
 			tile[5].setImage(ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png")));
 			
 		}catch(IOException e) {
+			System.err.println("Error loading tile images: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
+	
 	public void loadMap(String filePath) {
 		
 		try {
