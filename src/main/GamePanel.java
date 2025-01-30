@@ -3,6 +3,7 @@ package main;
 import javax.swing.JPanel;
 
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -24,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable{
          public final int maxScreenCol = 16;
          public final int maxScreenRow = 12;
          public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
-         public final int screenHeight = tileSize * maxScreenRow; //576 pixels
+         public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
          
          //WORLD SETTINGS
          public final int maxWorldCol = 50;
@@ -43,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
          Thread gameThread;
          
          // ENTITY AND OBJECT
-         public Player player = new Player(this,keyH);
+         public Entity player = new Player(this,keyH);  //this "player" is a subtype of entity
          public SuperObject obj[] = new SuperObject[10];
          
          

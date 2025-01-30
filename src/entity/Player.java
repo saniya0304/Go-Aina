@@ -13,21 +13,21 @@ import main.KeyHandler;
 
 public class Player extends Entity {
 	
-	GamePanel gp;
-	KeyHandler keyH;
-	public final int screenX;
-	public final int screenY;
-	public int hasKey = 0;
+	private GamePanel gp;
+	private KeyHandler keyH;
+	private final int screenX;
+	private final int screenY;
+    private int hasKey = 0;
 	
 	
 	
-	public Player(GamePanel gamePanel, KeyHandler keyH) {
+	public Player(GamePanel gamePanel, KeyHandler keyH) {     //Constructor of player class
 		 
 		this.gp = gamePanel;
 		this.keyH = keyH;
 		
-		screenX = gamePanel.screenWidth/2 - (gamePanel.tileSize/2);
-		screenY = gamePanel.screenHeight/2 - (gamePanel.tileSize/2);
+		screenX = gamePanel.screenWidth/2 - (gamePanel.tileSize/2); //360 pixels
+		screenY = gamePanel.screenHeight/2 - (gamePanel.tileSize/2); //264 pixels
 		
 		solidArea = new Rectangle();
 		solidArea.x = 8;
@@ -146,21 +146,21 @@ public class Player extends Entity {
     	   switch(objectName) {
     	   case "Key":
     		   gp.playSE(1);
-    		  hasKey++;
+    		  setHasKey(getHasKey() + 1);
     		  gp.obj[i] = null;
     		  gp.ui.showMessage("You have got lives!");
     		  break;
     	   case "Door":
-    		   if(hasKey > 0) {
+    		   if(getHasKey() > 0) {
     			   gp.playSE(3);
     			   gp.obj[i] = null;
-    			   hasKey--;
+    			   setHasKey(getHasKey() - 1);
     			   gp.ui.showMessage("You have defeated the enemy!");
     		   }
     		   else {
     			   gp.ui.showMessage("You need lives!");
     		   }
-    		   System.out.println("lives:" + hasKey);
+    		   System.out.println("lives:" + getHasKey());
     		   break;
     	   case "Boots":
     		   gp.playSE(2);
@@ -221,10 +221,30 @@ public class Player extends Entity {
     		break;
     	}
     	
-    	g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+    	g2.drawImage(image, getScreenX(), getScreenY(), gp.tileSize, gp.tileSize, null);
     	
     	
     }
+
+    @Override
+	public int getHasKey() {
+		return hasKey;
+	}
+
+    @Override
+	public void setHasKey(int hasKey) {
+		this.hasKey = hasKey;
+	}
+
+    @Override
+	public int getScreenX() {
+		return screenX;
+	}                                        
+
+    @Override
+	public int getScreenY() {
+		return screenY;
+	}
 }
 
 
