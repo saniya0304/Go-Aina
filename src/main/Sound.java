@@ -8,8 +8,8 @@ import javax.sound.sampled.Clip;
 
 public class Sound {
 	
-	Clip clip;
-	URL soundURL[] = new URL[30];
+	private Clip clip;
+	private URL soundURL[] = new URL[30];
 	
 	public Sound() {
 		
@@ -23,28 +23,24 @@ public class Sound {
 	public void setFile(int i) {
 		
 		try {
-			
 			AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
 			clip = AudioSystem.getClip();
 		    clip.open(ais);
 		    
-		}catch(Exception e) {
-			
-		}
+		}catch(Exception e) {	
+		System.err.println("Error Loading sound: " + e.getMessage());
+	   }
 	}
  
 	public void play() {
-		
 		clip.start();
 	}
 	
 	public void loop() {
-		
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
 	public void stop(){
-	
-		clip.stop();
+	    clip.stop();
 	}
 }

@@ -13,7 +13,7 @@ public class OBJ_Boots extends SuperObject{
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/boots.png"));
 			
 		}catch(IOException e) {
-			e.printStackTrace();	
+			System.err.println("Error loading boot image: " + e.getMessage());
 		}
 	}
 

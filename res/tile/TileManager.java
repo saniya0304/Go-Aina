@@ -56,7 +56,6 @@ public class TileManager {
 			
 		}catch(IOException e) {
 			System.err.println("Error loading tile images: " + e.getMessage());
-			e.printStackTrace();
 		}
 	}
 	

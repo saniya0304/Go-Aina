@@ -7,7 +7,7 @@ import object.OBJ_Key;
 
 public class AssetSetter {
  
-	GamePanel gp;
+	private GamePanel gp;
 	
 	public AssetSetter(GamePanel gp) {
 		this.gp = gp;

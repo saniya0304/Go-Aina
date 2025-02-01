@@ -15,7 +15,7 @@ public class OBJ_Key extends SuperObject {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/key.png"));
 			
 		}catch(IOException e) {
-			e.printStackTrace();	
+			System.err.println("Error loading key image: " + e.getMessage());	
 		}
 	}
 
@@ -28,7 +28,8 @@ public class OBJ_Key extends SuperObject {
 		    image = ImageIO.read(getClass().getResourceAsStream("/objects/key.png"));
 		
 	    }catch(IOException e) {
-		    e.printStackTrace();	
+	    	System.err.println("Error loading key image: " + e.getMessage());
+		   
 	    }
      }
 }
