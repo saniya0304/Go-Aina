@@ -8,26 +8,106 @@ import main.GamePanel;
 
 public class SuperObject {
 
-	public BufferedImage image;
-	public String name;
-	public boolean collision = false;
-	public int worldX, worldY;
-	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
-	public int solidAreaDefaultX = 0;
-	public int solidAreaDefaultY = 0;
+	private BufferedImage image;
+	private String name;
+	private boolean collision = false;
+	private int worldX, worldY;
+	private Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+	private int solidAreaDefaultX = 0;
+	private int solidAreaDefaultY = 0;
 	
 	
 	public void draw(Graphics2D g2, GamePanel gp) {
 		
-		int screenX = worldX - gp.player.worldX + gp.player.getScreenX();
-		int screenY = worldY - gp.player.worldY + gp.player.getScreenY();                     //inclusion = getScreenX and getScreenY gets called from player class despite being in entity too because player class overrides them
+		int screenX = getWorldX() - gp.getPlayer().getWorldX() + gp.getPlayer().getScreenX();
+		int screenY = getWorldY() - gp.getPlayer().getWorldY() + gp.getPlayer().getScreenY();                     //inclusion = getScreenX and getScreenY gets called from player class despite being in entity too because player class overrides them
 		
-		if(worldX + gp.tileSize > gp.player.worldX - gp.player.getScreenX() &&
-		   worldX - gp.tileSize < gp.player.worldX + gp.player.getScreenX() &&
-		   worldY + gp.tileSize > gp.player.worldY - gp.player.getScreenY() &&
-		   worldY - gp.tileSize < gp.player.worldY + gp.player.getScreenY()) {
+		if(getWorldX() + gp.getTileSize() > gp.getPlayer().getWorldX() - gp.getPlayer().getScreenX() &&
+		   getWorldX() - gp.getTileSize() < gp.getPlayer().getWorldX() + gp.getPlayer().getScreenX() &&
+		   getWorldY() + gp.getTileSize() > gp.getPlayer().getWorldY() - gp.getPlayer().getScreenY() &&
+		   getWorldY() - gp.getTileSize() < gp.getPlayer().getWorldY() + gp.getPlayer().getScreenY()) {
 		
-		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+		g2.drawImage(getImage(), screenX, screenY, gp.getTileSize(), gp.getTileSize(), null);
 	  }
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public int getWorldX() {
+		return worldX;
+	}
+
+
+	public void setWorldX(int worldX) {
+		this.worldX = worldX;
+	}
+
+
+	public int getWorldY() {
+		return worldY;
+	}
+
+
+	public void setWorldY(int worldY) {
+		this.worldY = worldY;
+	}
+
+
+	public Rectangle getSolidArea() {
+		return solidArea;
+	}
+
+
+	public void setSolidArea(Rectangle solidArea) {
+		this.solidArea = solidArea;
+	}
+
+
+	public boolean isCollision() {
+		return collision;
+	}
+
+
+	public void setCollision(boolean collision) {
+		this.collision = collision;
+	}
+
+
+	public int getSolidAreaDefaultX() {
+		return solidAreaDefaultX;
+	}
+
+
+	public void setSolidAreaDefaultX(int solidAreaDefaultX) {
+		this.solidAreaDefaultX = solidAreaDefaultX;
+	}
+
+
+	public int getSolidAreaDefaultY() {
+		return solidAreaDefaultY;
+	}
+
+
+	public void setSolidAreaDefaultY(int solidAreaDefaultY) {
+		this.solidAreaDefaultY = solidAreaDefaultY;
+	}
+
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 }

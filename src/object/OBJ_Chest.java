@@ -6,14 +6,14 @@ import javax.imageio.ImageIO;
 
 public class OBJ_Chest extends SuperObject{
 	
-public OBJ_Chest() {
+  public OBJ_Chest() {
 		
-		name = "Chest";
+		setName("Chest");
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/chest.png"));
+			setImage(ImageIO.read(getClass().getResourceAsStream("/objects/chest.png")));
 			
 		}catch(IOException e) {
-			e.printStackTrace();	
+			System.err.println("Error getting image: " + e.getMessage());	
 		}
 	}
 

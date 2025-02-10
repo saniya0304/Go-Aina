@@ -6,16 +6,16 @@ import javax.imageio.ImageIO;
 
 public class OBJ_Door extends SuperObject {
 	
-public OBJ_Door() {
+   public OBJ_Door() {
 		
-		name = "Door";
+		setName("Door");
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/door.png"));
+			setImage(ImageIO.read(getClass().getResourceAsStream("/objects/door.png")));
 			
 		}catch(IOException e) {
-			e.printStackTrace();	
+			System.err.println("Error getting image: " + e.getMessage());
 		}
-		collision = true;
+		setCollision(true);
 	}
 
 }

@@ -6,51 +6,53 @@ import javax.swing.JPanel;
 import entity.Entity;
 import entity.Player;
 import object.SuperObject;
+import sound.CitySound;
+import sound.Sound;
 import tile.TileManager;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Dimension;
-
+import java.awt.event.KeyListener;
 
 
 public class GamePanel extends JPanel implements Runnable{
 	
          // SCREEN SETTINGS
-	     final int originalTileSize = 16; //16x16 tile
-         final int scale =  3;	 
+	     private final byte originalTileSize = 16; //16x16 tile
+         private final byte scale =  3;	 
          
-         public final int tileSize = originalTileSize * scale; //48x48 tile
-         public final int maxScreenCol = 16;
-         public final int maxScreenRow = 12;
-         public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
-         public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
+         private final byte tileSize = originalTileSize * scale; //48x48 tile
+         private final byte maxScreenCol = 16;
+         private final byte maxScreenRow = 12;
+         private final int screenWidth = getTileSize() * maxScreenCol; // 768 pixels
+         private final int screenHeight = getTileSize() * maxScreenRow; // 576 pixels
          
          //WORLD SETTINGS
-         public final int maxWorldCol = 50;
-         public final int maxWorldRow = 50;
+         private final byte maxWorldCol = 50;
+         private final byte maxWorldRow = 50;
         
          //FPS
-         int FPS = 60; //updates the screen 60 times per second
+         private byte FPS = 60; //updates the screen 60 times per second
          
-         TileManager tileM = new TileManager(this);
-         KeyHandler keyH = new KeyHandler();
-         Sound music = new Sound();
-         Sound se = new Sound();
-         public CollisionChecker cChecker = new CollisionChecker(this);
-         public AssetSetter aSetter = new AssetSetter(this);
-         public UI ui = new UI(this);
-         Thread gameThread;
+         private TileManager tileM = new TileManager(this);
+         private KeyListener keyH = new KeyHandler();   
+         private Sound music = new CitySound();
+         private Sound se = new CitySound();
+         private CollisionChecker cChecker = new CollisionChecker(this);
+         private AssetSetter aSetter = new AssetSetter(this);
+         private UI ui = new UI(this);
+         private Thread gameThread;
          
          // ENTITY AND OBJECT
-         public Entity player = new Player(this,keyH);  //this "player" is a subtype of entity
-         public SuperObject obj[] = new SuperObject[10];
+         private Entity player = new Player(this,keyH);  
+         private SuperObject obj[] = new SuperObject[10];
          
          
          public  GamePanel() {
         	 
-        	 this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        	 this.setPreferredSize(new Dimension(getScreenWidth(), getScreenHeight()));
         	 this.setBackground(Color.black);
         	 this.setDoubleBuffered(true);
         	 this.addKeyListener(keyH);
@@ -67,8 +69,8 @@ public class GamePanel extends JPanel implements Runnable{
 
          public void startGameThread() {
         	 
-        	 gameThread = new Thread(this);
-        	 gameThread.start();
+        	 setGameThread(new Thread(this));
+        	 getGameThread().start();
          }
 		
        @Override	
@@ -82,7 +84,7 @@ public class GamePanel extends JPanel implements Runnable{
         	 int drawCount = 0;
         	 
         	 
-        	 while(gameThread != null) {
+        	 while(getGameThread() != null) {
         		 
         		 currentTime = System.nanoTime();
         		 
@@ -105,7 +107,7 @@ public class GamePanel extends JPanel implements Runnable{
          }
          
          public void update() {
-        	player.update();
+        	getPlayer().update();
          }
          
          public void paintComponent(Graphics g) {
@@ -113,20 +115,20 @@ public class GamePanel extends JPanel implements Runnable{
         	 Graphics2D g2 = (Graphics2D)g;
         	 
         	 // TILE 
-        	 tileM.draw(g2);
+        	 getTileM().draw(g2);
         	 
         	 // OBJECT
-        	 for(int i = 0; i < obj.length; i++) {
-        		 if(obj[i] != null) {
-        			 obj[i].draw(g2, this);
+        	 for(int i = 0; i < getObj().length; i++) {
+        		 if(getObj()[i] != null) {
+        			 getObj()[i].draw(g2, this);
         		 }
         	 }
         	 
         	 // PLAYER
-        	 player.draw(g2);
+        	 getPlayer().draw(g2);
         	 
         	 // UI
-        	 ui.draw(g2);
+        	 getUi().draw(g2);
         	 
         	 g2.dispose();
         	 
@@ -146,4 +148,72 @@ public class GamePanel extends JPanel implements Runnable{
         	 se.setFile(i);
         	 se.play();
          }
+
+		public byte getTileSize() {
+			return tileSize;
+		}
+
+		public int getScreenHeight() {
+			return screenHeight;
+		}
+
+		public int getScreenWidth() {
+			return screenWidth;
+		}
+
+		public CollisionChecker getcChecker() {
+			return cChecker;
+		}
+
+		public void setcChecker(CollisionChecker cChecker) {
+			this.cChecker = cChecker;
+		}
+
+		public SuperObject[] getObj() {
+			return obj;
+		}
+
+		public void setObj(SuperObject obj[]) {
+			this.obj = obj;
+		}
+
+		public UI getUi() {
+			return ui;
+		}
+
+		public void setUi(UI ui) {
+			this.ui = ui;
+		}
+
+		public TileManager getTileM() {
+			return tileM;
+		}
+
+		public void setTileM(TileManager tileM) {
+			this.tileM = tileM;
+		}
+
+		public int getMaxWorldRow() {
+			return maxWorldRow;
+		}
+
+		public int getMaxWorldCol() {
+			return maxWorldCol;
+		}
+
+		public Entity getPlayer() {
+			return player;
+		}
+
+		public void setPlayer(Entity player) {
+			this.player = player;
+		}
+
+		public Thread getGameThread() {
+			return gameThread;
+		}
+
+		public void setGameThread(Thread gameThread) {
+			this.gameThread = gameThread;
+		}
 }

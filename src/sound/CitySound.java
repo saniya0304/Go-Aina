@@ -1,4 +1,4 @@
-package main;
+package sound;
 
 import java.net.URL;
 
@@ -6,12 +6,12 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-public class Sound {
+public class CitySound implements Sound {
 	
-	private Clip clip;
+	private Clip clip;                                                                                                                        
 	private URL soundURL[] = new URL[30];
 	
-	public Sound() {
+	public CitySound() {
 		
 		soundURL[0] = getClass().getResource("/sound/BlueBoyAdventure.wav");
 		soundURL[1] = getClass().getResource("/sound/coin.wav");
@@ -35,11 +35,9 @@ public class Sound {
 	public void play() {
 		clip.start();
 	}
-	
 	public void loop() {
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
-	
 	public void stop(){
 	    clip.stop();
 	}

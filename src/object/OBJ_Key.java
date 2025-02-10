@@ -10,9 +10,9 @@ public class OBJ_Key extends SuperObject {
 	
 	public OBJ_Key() {
 		
-		name = "Key";
+		setName("Key");
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/key.png"));
+			setImage(ImageIO.read(getClass().getResourceAsStream("/objects/key.png")));
 			
 		}catch(IOException e) {
 			System.err.println("Error loading key image: " + e.getMessage());	
@@ -23,9 +23,9 @@ public class OBJ_Key extends SuperObject {
     
     public OBJ_Key(String name) {
 	
-	    this.name = name;
+	    this.setName(name);
 	    try {
-		    image = ImageIO.read(getClass().getResourceAsStream("/objects/key.png"));
+		    setImage(ImageIO.read(getClass().getResourceAsStream("/objects/key.png")));
 		
 	    }catch(IOException e) {
 	    	System.err.println("Error loading key image: " + e.getMessage());

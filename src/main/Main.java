@@ -19,6 +19,8 @@ public class Main {
 		window.setLocationRelativeTo(null);     //"null" sets the frame location to center
 		window.setVisible(true);
 		
+		
+		
 		gamePanel.setupGame();   // sets up the objects used in the game like heart, etc. & plays the music
 		gamePanel.startGameThread();  // the process starts 
 	}
